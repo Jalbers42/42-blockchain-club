@@ -1,9 +1,11 @@
 import Navbar from './Navbar';
-import Hero from './Hero';
+import Login from './Login';
+import Home from './Home';
 import Footer from './Footer';
 
 export {
     Navbar,
-    Hero,
+    Login,
+    Home,
     Footer,
 }
