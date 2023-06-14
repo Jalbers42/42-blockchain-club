@@ -36,7 +36,7 @@ const Login = () => {
 
             <form id="authForm" action="https://api.intra.42.fr/oauth/authorize" method="GET">
               <input type="hidden" name="client_id" value="u-s4t2ud-bb2a73ab05b66cf3709517ff377eba7a4e91f57be600b7c31ba96931dad7341a" />
-              <input type="hidden" name="redirect_uri" value="https://en.wikipedia.org/wiki/Blockchain" />
+              <input type="hidden" name="redirect_uri" value="http://localhost:5173/42-blockchain-club/home" />
               <input type="hidden" name="response_type" value="code" />
               <input type="hidden" name="scope" value="public" />
               <input type="hidden" name="state" value={randomString} /> 
