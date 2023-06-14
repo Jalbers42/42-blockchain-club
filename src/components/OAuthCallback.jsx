@@ -1,27 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
+import { UserContext } from '../context/UserContext';
 
 // Make the API request to fetch user data using the access token
-const fetchUserData = async (accessToken) => {
-try {
-    const response = await axios.get('https://api.intra.42.fr/v2/me', {
-    headers: {
-        Authorization: `Bearer ${accessToken}`,
-    },
-    });
-    const userData = response.data;
-    // Do something with the user data (e.g., store it in state)
-    setUserData(userData);
-    console.log('User Data:', userData);
-} catch (error) {
-    console.error('Failed to fetch user data:', error);
-}
-};
 
 const OAuthCallback = () => {
+
+    const { updateUser } = useContext(UserContext);
+
+    const fetchUserData = async (accessToken, endpoint) => {
+        try {
+            const response = await axios.get('https://api.intra.42.fr/' + endpoint, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            const userData = response.data;
+            updateUser(userData);
+            // setUserData(userData);
+            console.log('User Data:', userData);
+        } catch (error) {
+            console.error('Failed to fetch user data:', error);
+        }
+    };
+    
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
+        // Use the state to ensure auth flow originates from this application 
         const state = urlParams.get('state');
         
         const data = {
@@ -44,6 +50,7 @@ const OAuthCallback = () => {
 
         .then((data) => {
             const accessToken = data.access_token;
+            fetchUserData(accessToken, "v2/me");
             // Do something with the access token (e.g., store it in state or local storage)
             console.log('Access Token:', accessToken);
         })
@@ -54,7 +61,6 @@ const OAuthCallback = () => {
 
 
 
-        fetchUserData();
 
     }, []);
 
