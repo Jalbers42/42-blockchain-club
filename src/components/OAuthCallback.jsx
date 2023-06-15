@@ -32,10 +32,10 @@ const OAuthCallback = () => {
         
         const data = {
             grant_type: 'authorization_code',
-            client_id: 'u-s4t2ud-bb2a73ab05b66cf3709517ff377eba7a4e91f57be600b7c31ba96931dad7341a',
-            client_secret: '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',
+            client_id: 'YOUR_APP_UID_FOUND_ON_INTRA',
+            client_secret: 'YOUR_SECRET_FOUND_ON_INTRA',
             code: code,
-            redirect_uri: 'http://localhost:5173/42-blockchain-club/home',
+            redirect_uri: 'http://localhost:5173/home',
         };
 
         fetch('https://api.intra.42.fr/oauth/token', {
